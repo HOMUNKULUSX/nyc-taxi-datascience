@@ -1,0 +1,115 @@
+DATA UNDRESTANDING REPORT 
+==================================================
+
+Data Shape:
+(200, 18)
+
+Columns Name:
+['VendorID', 'tpep_pickup_datetime', 'tpep_dropoff_datetime', 'passenger_count', 'trip_distance', 'RatecodeID', 'store_and_fwd_flag', 'PULocationID', 'DOLocationID', 'payment_type', 'fare_amount', 'extra', 'mta_tax', 'tip_amount', 'tolls_amount', 'improvement_surcharge', 'total_amount', 'congestion_surcharge']
+
+Data Type:
+VendorID                 float64
+tpep_pickup_datetime      object
+tpep_dropoff_datetime     object
+passenger_count          float64
+trip_distance            float64
+RatecodeID               float64
+store_and_fwd_flag        object
+PULocationID               int64
+DOLocationID               int64
+payment_type             float64
+fare_amount              float64
+extra                    float64
+mta_tax                  float64
+tip_amount               float64
+tolls_amount             float64
+improvement_surcharge    float64
+total_amount             float64
+congestion_surcharge     float64
+dtype: object
+
+Unique Values:
+VendorID                   3
+tpep_pickup_datetime     200
+tpep_dropoff_datetime    200
+passenger_count            7
+trip_distance            145
+RatecodeID                 3
+store_and_fwd_flag         1
+PULocationID              53
+DOLocationID              69
+payment_type               2
+fare_amount               60
+extra                      7
+mta_tax                    2
+tip_amount                80
+tolls_amount               4
+improvement_surcharge      1
+total_amount             128
+congestion_surcharge       2
+dtype: int64
+
+NULL Values:
+VendorID                 0
+tpep_pickup_datetime     0
+tpep_dropoff_datetime    0
+passenger_count          0
+trip_distance            0
+RatecodeID               0
+store_and_fwd_flag       0
+PULocationID             0
+DOLocationID             0
+payment_type             0
+fare_amount              0
+extra                    0
+mta_tax                  0
+tip_amount               0
+tolls_amount             0
+improvement_surcharge    0
+total_amount             0
+congestion_surcharge     0
+dtype: int64
+
+Duplicate Rows:
+0
+
+Desciptive Statistics:
+         VendorID  passenger_count  trip_distance  RatecodeID  PULocationID  \
+count  200.000000       200.000000      200.00000  200.000000     200.00000   
+mean     1.605000         1.560000        3.72935    1.055000     162.26000   
+std      0.519929         1.222239        4.71901    0.335466      64.62985   
+min      1.000000         0.000000        0.16000    1.000000       4.00000   
+25%      1.000000         1.000000        1.12750    1.000000     132.00000   
+50%      2.000000         1.000000        1.88000    1.000000     161.00000   
+75%      2.000000         2.000000        3.82000    1.000000     230.25000   
+max      4.000000         6.000000       22.00000    5.000000     264.00000   
+
+       DOLocationID  payment_type  fare_amount       extra     mta_tax  \
+count    200.000000    200.000000   200.000000  200.000000  200.000000   
+mean     169.080000      1.285000    15.402500    0.790000    0.497500   
+std       67.869618      0.452547    15.172931    1.048282    0.035355   
+min       13.000000      1.000000     3.000000    0.000000    0.000000   
+25%      131.250000      1.000000     7.000000    0.000000    0.500000   
+50%      164.000000      1.000000     9.500000    0.500000    0.500000   
+75%      236.000000      2.000000    17.000000    1.000000    0.500000   
+max      265.000000      2.000000   120.000000    4.500000    0.500000   
+
+       tip_amount  tolls_amount  improvement_surcharge  total_amount  \
+count  200.000000    200.000000           2.000000e+02    200.000000   
+mean     2.013900      0.465700           3.000000e-01     20.154350   
+std      2.292065      1.672997           5.565045e-17     17.072769   
+min      0.000000      0.000000           3.000000e-01      4.300000   
+25%      0.000000      0.000000           3.000000e-01     10.215000   
+50%      1.650000      0.000000           3.000000e-01     14.120000   
+75%      2.712500      0.000000           3.000000e-01     22.552500   
+max     14.640000     10.700000           3.000000e-01    125.300000   
+
+       congestion_surcharge  
+count            200.000000  
+mean               1.125000  
+std                1.246855  
+min                0.000000  
+25%                0.000000  
+50%                0.000000  
+75%                2.500000  
+max                2.500000  
