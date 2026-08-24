@@ -2,30 +2,32 @@ DATA UNDRESTANDING REPORT
 ==================================================
 
 Data Shape:
-(200, 18)
+(200, 20)
 
 Columns Name:
-['VendorID', 'tpep_pickup_datetime', 'tpep_dropoff_datetime', 'passenger_count', 'trip_distance', 'RatecodeID', 'store_and_fwd_flag', 'PULocationID', 'DOLocationID', 'payment_type', 'fare_amount', 'extra', 'mta_tax', 'tip_amount', 'tolls_amount', 'improvement_surcharge', 'total_amount', 'congestion_surcharge']
+['VendorID', 'tpep_pickup_datetime', 'tpep_dropoff_datetime', 'passenger_count', 'trip_distance', 'RatecodeID', 'store_and_fwd_flag', 'PULocationID', 'DOLocationID', 'payment_type', 'fare_amount', 'extra', 'mta_tax', 'tip_amount', 'tolls_amount', 'improvement_surcharge', 'total_amount', 'congestion_surcharge', 'trip_duration', 'average_speed']
 
 Data Type:
-VendorID                 float64
-tpep_pickup_datetime      object
-tpep_dropoff_datetime     object
-passenger_count          float64
-trip_distance            float64
-RatecodeID               float64
-store_and_fwd_flag        object
-PULocationID               int64
-DOLocationID               int64
-payment_type             float64
-fare_amount              float64
-extra                    float64
-mta_tax                  float64
-tip_amount               float64
-tolls_amount             float64
-improvement_surcharge    float64
-total_amount             float64
-congestion_surcharge     float64
+VendorID                         float64
+tpep_pickup_datetime      datetime64[ns]
+tpep_dropoff_datetime     datetime64[ns]
+passenger_count                  float64
+trip_distance                    float64
+RatecodeID                       float64
+store_and_fwd_flag                object
+PULocationID                       int64
+DOLocationID                       int64
+payment_type                     float64
+fare_amount                      float64
+extra                            float64
+mta_tax                          float64
+tip_amount                       float64
+tolls_amount                     float64
+improvement_surcharge            float64
+total_amount                     float64
+congestion_surcharge             float64
+trip_duration            timedelta64[ns]
+average_speed                    float64
 dtype: object
 
 Unique Values:
@@ -47,6 +49,8 @@ tolls_amount               4
 improvement_surcharge      1
 total_amount             128
 congestion_surcharge       2
+trip_duration            189
+average_speed            200
 dtype: int64
 
 NULL Values:
@@ -68,48 +72,139 @@ tolls_amount             0
 improvement_surcharge    0
 total_amount             0
 congestion_surcharge     0
+trip_duration            0
+average_speed            0
 dtype: int64
 
 Duplicate Rows:
 0
 
 Desciptive Statistics:
-         VendorID  passenger_count  trip_distance  RatecodeID  PULocationID  \
-count  200.000000       200.000000      200.00000  200.000000     200.00000   
-mean     1.605000         1.560000        3.72935    1.055000     162.26000   
-std      0.519929         1.222239        4.71901    0.335466      64.62985   
-min      1.000000         0.000000        0.16000    1.000000       4.00000   
-25%      1.000000         1.000000        1.12750    1.000000     132.00000   
-50%      2.000000         1.000000        1.88000    1.000000     161.00000   
-75%      2.000000         2.000000        3.82000    1.000000     230.25000   
-max      4.000000         6.000000       22.00000    5.000000     264.00000   
+         VendorID           tpep_pickup_datetime  \
+count  200.000000                            200   
+mean     1.605000  2019-04-17 12:03:06.370000128   
+min      1.000000            2019-01-01 04:11:08   
+25%      1.000000            2019-01-16 06:53:20   
+50%      2.000000     2019-04-16 15:37:38.500000   
+75%      2.000000            2019-07-18 07:20:45   
+max      4.000000            2019-07-31 23:10:37   
+std      0.519929                            NaN   
 
-       DOLocationID  payment_type  fare_amount       extra     mta_tax  \
-count    200.000000    200.000000   200.000000  200.000000  200.000000   
-mean     169.080000      1.285000    15.402500    0.790000    0.497500   
-std       67.869618      0.452547    15.172931    1.048282    0.035355   
-min       13.000000      1.000000     3.000000    0.000000    0.000000   
-25%      131.250000      1.000000     7.000000    0.000000    0.500000   
-50%      164.000000      1.000000     9.500000    0.500000    0.500000   
-75%      236.000000      2.000000    17.000000    1.000000    0.500000   
-max      265.000000      2.000000   120.000000    4.500000    0.500000   
+               tpep_dropoff_datetime  passenger_count  trip_distance  \
+count                            200       200.000000      200.00000   
+mean   2019-04-17 12:19:39.230000128         1.560000        3.72935   
+min              2019-01-01 04:23:31         0.000000        0.16000   
+25%    2019-01-16 07:40:26.750000128         1.000000        1.12750   
+50%       2019-04-16 15:51:58.500000         1.000000        1.88000   
+75%    2019-07-18 07:32:24.750000128         2.000000        3.82000   
+max              2019-07-31 23:19:23         6.000000       22.00000   
+std                              NaN         1.222239        4.71901   
 
-       tip_amount  tolls_amount  improvement_surcharge  total_amount  \
-count  200.000000    200.000000           2.000000e+02    200.000000   
-mean     2.013900      0.465700           3.000000e-01     20.154350   
-std      2.292065      1.672997           5.565045e-17     17.072769   
-min      0.000000      0.000000           3.000000e-01      4.300000   
-25%      0.000000      0.000000           3.000000e-01     10.215000   
-50%      1.650000      0.000000           3.000000e-01     14.120000   
-75%      2.712500      0.000000           3.000000e-01     22.552500   
-max     14.640000     10.700000           3.000000e-01    125.300000   
+       RatecodeID  PULocationID  DOLocationID  payment_type  fare_amount  \
+count  200.000000     200.00000    200.000000    200.000000   200.000000   
+mean     1.055000     162.26000    169.080000      1.285000    15.402500   
+min      1.000000       4.00000     13.000000      1.000000     3.000000   
+25%      1.000000     132.00000    131.250000      1.000000     7.000000   
+50%      1.000000     161.00000    164.000000      1.000000     9.500000   
+75%      1.000000     230.25000    236.000000      2.000000    17.000000   
+max      5.000000     264.00000    265.000000      2.000000   120.000000   
+std      0.335466      64.62985     67.869618      0.452547    15.172931   
 
-       congestion_surcharge  
-count            200.000000  
-mean               1.125000  
-std                1.246855  
-min                0.000000  
-25%                0.000000  
-50%                0.000000  
-75%                2.500000  
-max                2.500000  
+            extra     mta_tax  tip_amount  tolls_amount  \
+count  200.000000  200.000000  200.000000    200.000000   
+mean     0.790000    0.497500    2.013900      0.465700   
+min      0.000000    0.000000    0.000000      0.000000   
+25%      0.000000    0.500000    0.000000      0.000000   
+50%      0.500000    0.500000    1.650000      0.000000   
+75%      1.000000    0.500000    2.712500      0.000000   
+max      4.500000    0.500000   14.640000     10.700000   
+std      1.048282    0.035355    2.292065      1.672997   
+
+       improvement_surcharge  total_amount  congestion_surcharge  \
+count           2.000000e+02    200.000000            200.000000   
+mean            3.000000e-01     20.154350              1.125000   
+min             3.000000e-01      4.300000              0.000000   
+25%             3.000000e-01     10.215000              0.000000   
+50%             3.000000e-01     14.120000              0.000000   
+75%             3.000000e-01     22.552500              2.500000   
+max             3.000000e-01    125.300000              2.500000   
+std             5.565045e-17     17.072769              1.246855   
+
+                   trip_duration  average_speed  
+count                        200     200.000000  
+mean      0 days 00:16:32.860000      12.350733  
+min              0 days 00:01:42       1.994785  
+25%       0 days 00:07:20.750000       8.014618  
+50%       0 days 00:11:34.500000      10.308362  
+75%       0 days 00:20:25.500000      14.969166  
+max              0 days 01:42:16      36.142386  
+std    0 days 00:15:21.591811887       6.842080  
+
+Checking the min values of the following columns:
+VendorID                  1.000000
+passenger_count           0.000000
+trip_distance             0.160000
+RatecodeID                1.000000
+PULocationID              4.000000
+DOLocationID             13.000000
+payment_type              1.000000
+fare_amount               3.000000
+extra                     0.000000
+mta_tax                   0.000000
+tip_amount                0.000000
+tolls_amount              0.000000
+improvement_surcharge     0.300000
+total_amount              4.300000
+congestion_surcharge      0.000000
+average_speed             1.994785
+dtype: float64
+
+Minimum Values <= 0
+VendorID                 False
+passenger_count           True
+trip_distance            False
+RatecodeID               False
+PULocationID             False
+DOLocationID             False
+payment_type             False
+fare_amount              False
+extra                     True
+mta_tax                   True
+tip_amount                True
+tolls_amount              True
+improvement_surcharge    False
+total_amount             False
+congestion_surcharge      True
+average_speed            False
+dtype: bool
+
+Data Quality Findings _ report 
+
+        PASSENGER COUNT
+        ________
+
+        -- 4 records have passenger_count = 0.
+        -- These records contain valid information
+        -- The records were retained because there is not enough
+        evidence to classify them as invalid trips.
+
+        __________________________________________________
+
+        TRIP TIME VALIDATION
+        ________________
+
+        No trips were found where the drop-off time
+        was before the pickup time.
+
+        ___________________________________________________
+
+        TRIP DISTANCE & DURATION AND AVERAGE SPEED VALIDATION
+        _________________________________________
+
+        No negative trip_duration values were found.
+        No unrelistic relationship between trip_distance and 
+        trip_diration was found.
+        No trip with average speed above 100 mph were found.
+        The 99th percentile of average speed was 35.06 mph,
+        indicating no unusually high speeds in the dataset.
+        
