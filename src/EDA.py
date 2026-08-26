@@ -116,7 +116,32 @@ else:
         "figures/scatter_tippercentage.png"
     )
 
+# What part of days most trips happen?
+# 24H
+df["pickup_hour"] = df["tpep_pickup_datetime"].dt.hour
 
+df["pickup_hour"].plot(kind='hist', bins=10, figsize=(12, 12))
+plt.title("HOUR DISTRIBUTION")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/hour_distribution.png"
+    )
+
+# Which day of a week most trips happen?
+df["pickup_day"] = df["tpep_pickup_datetime"].dt.dayofweek
+
+df["pickup_day"].plot(kind='hist', bins=10, figsize=(12, 12))
+plt.title("DAY DISTRINUTION")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/hour_distribution.png"
+    )
 
 
 
