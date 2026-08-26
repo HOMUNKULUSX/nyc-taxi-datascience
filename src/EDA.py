@@ -217,7 +217,7 @@ else:
     )
 
 
-TopDOL = df.groupby("Zone_x")["total_amount"].sum()
+TopDOL = df.groupby("Zone_y")["total_amount"].sum()
 TopDOL.plot(kind='bar', figsize=(12, 12))
 
 # Attention that is not about most expensive areas beacuse some of them just happen much more than others
@@ -228,6 +228,38 @@ if show:
 else:
     plt.savefig(
         "figures/some_of_totalamount2.png"
+    )
+
+
+# Now to compare the cost of zones and number of zones:
+
+top_zones = df["Zone_x"].value_counts().head(10).index
+
+data = df[df["Zone_x"].isin(top_zones)].groupby("Zone_x").agg(
+    total_amount=("total_amount", "sum"),
+    trip_count=("Zone_x", "size")
+).loc[top_zones]
+
+fig, ax1 = plt.subplots()
+
+ax1.plot(data.index, data["total_amount"], color="blue", marker="o", label="Total amount")
+
+ax2 = ax1.twinx()
+ax2.plot(data.index, data["trip_count"], color="red", marker="o", label="Counter")
+
+ax1.legend(loc="upper left")
+ax2.legend(loc="upper right")
+
+plt.title("compare the size and cost of PULocation")
+
+plt.tight_layout()
+
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/compare_sizeandtotalamount_for_PUL.png"
     )
 
 
