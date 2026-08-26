@@ -59,8 +59,8 @@ else:
         "figures/tip_distribution.png"
     )
 
-# There is any relation between the cost of trip and tip?
-corr = df[["tip_amount", "fare_amount"]].corr()
+# Looking for any relation or better say correlation between tip, amount, duration, passenger count
+corr = df[["tip_amount", "fare_amount", "trip_duration", "passenger_count", "average_speed"]].corr()
 
 plt.figure(figsize=(12, 12))
 
@@ -141,6 +141,38 @@ if show:
 else:
     plt.savefig(
         "figures/hour_distribution.png"
+    )
+
+# check, the relation between distance and amount
+sns.scatterplot(
+    x='trip_distance',
+    y='fare_amount',
+    data=df
+)
+
+plt.title("RELATION BETWEEN AMOUNT AND DISTANCE")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/amount_and_distance.png"
+    )
+
+# Is there any relation between cost of trip and count of passengers?
+sns.scatterplot(
+    x='fare_amount',
+    y='passenger_count',
+    data=df
+)
+
+plt.title("RELATION BETWEEN AMOUBT AND NUMBER OF PASSENGERS")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/amount_and_passengers.png"
     )
 
 
