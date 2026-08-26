@@ -6,6 +6,12 @@ from checking import df
 
 
 #df = pd.read_csv("data/taxi.csv")
+lookup = pd.read_csv("data/taxi_zone_lookup.csv")
+
+pd.set_option(
+    "display.max_columns",
+    None
+)
 
 show = True
 
@@ -177,4 +183,15 @@ else:
 
 
 
-
+# Until now we've worked on most features except PULocation and DuLocation or for short
+# Location_id, as you know location_id is just a number which point a specific area in New York
+# To know what these numbers are really abount,I am going to use taxi_zone_lookup dataset.
+    
+# PULocation: where the passengers pick up
+df = df.merge(
+    lookup,
+    left_on='PULocationID',
+    right_on='LocationID',
+    how='left'
+)
+print(df["Zone"].nunique())
