@@ -194,4 +194,40 @@ df = df.merge(
     right_on='LocationID',
     how='left'
 )
-print(df["Zone"].nunique())
+
+# DOLocation: where the passengers drop off
+df = df.merge(
+    lookup,
+    left_on='DOLocationID',
+    right_on='LocationID',
+    how='left'
+)
+
+TopPUL = df.groupby("Zone_x")["total_amount"].sum()
+TopPUL.plot(kind='bar', figsize=(12, 12))
+
+# Attention that is not about most expensive areas beacuse some of them just happen much more than others
+plt.title("The sum of total cost for each PULocation")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/some_of_totalamount.png"
+    )
+
+
+TopDOL = df.groupby("Zone_x")["total_amount"].sum()
+TopDOL.plot(kind='bar', figsize=(12, 12))
+
+# Attention that is not about most expensive areas beacuse some of them just happen much more than others
+plt.title("The sum of total cost for each DOLocation")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/some_of_totalamount2.png"
+    )
+
+
