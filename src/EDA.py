@@ -295,4 +295,28 @@ else:
     )
 
 
+# Checking the payment_type:
+# In our dataset we only have 1 and 2 in this column
+# 1 = Credit Card
+# 2 = Cash
+# Visulazing the relation between this feature and other features like
+# total amount, tip amount, PULocation
+    
+corr = df[["payment_type", "total_amount", "tip_amount", "PULocationID"]].corr()
+
+sns.heatmap(
+    corr,
+    annot=True,
+    cmap="coolwarm",
+    fmt="0.2f"
+)
+
+plt.title("RELATION BETWEEN PAYMENT TYPE AND OTHER FEATURES")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/heatmap_to_check_paymenttype.png"
+    )
 
