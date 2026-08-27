@@ -233,12 +233,12 @@ else:
 
 # Now to compare the cost of zones and number of zones:
 
-top_zones = df["Zone_x"].value_counts().head(10).index
+top_zones_x = df["Zone_x"].value_counts().head(10).index
 
-data = df[df["Zone_x"].isin(top_zones)].groupby("Zone_x").agg(
+data = df[df["Zone_x"].isin(top_zones_x)].groupby("Zone_x").agg(
     total_amount=("total_amount", "sum"),
     trip_count=("Zone_x", "size")
-).loc[top_zones]
+).loc[top_zones_x]
 
 fig, ax1 = plt.subplots()
 
@@ -261,5 +261,38 @@ else:
     plt.savefig(
         "figures/compare_sizeandtotalamount_for_PUL.png"
     )
+
+
+# same thing on DOLucatio n:
+
+top_zones_y = df["Zone_y"].value_counts().head(10).index
+
+data = df[df["Zone_y"].isin(top_zones_y)].groupby("Zone_y").agg(
+    total_amount=("total_amount", "sum"),
+    trip_count=("Zone_y", "size")
+).loc[top_zones_y]
+
+fig, ax1 = plt.subplots()
+
+ax1.plot(data.index, data["total_amount"], color="blue", marker="o", label="Total amount")
+
+ax2 = ax1.twinx()
+ax2.plot(data.index, data["trip_count"], color="red", marker="o", label="Counter")
+
+ax1.legend(loc="upper left")
+ax2.legend(loc="upper right")
+
+plt.title("compare the size and cost of PULocation")
+
+plt.tight_layout()
+
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/compare_sizeandtotalamount_for_DOL.png"
+    )
+
 
 
