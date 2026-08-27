@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import sqlite3 as sql
 from checking import df
 
 
@@ -300,9 +301,9 @@ else:
 # 1 = Credit Card
 # 2 = Cash
 # Visulazing the relation between this feature and other features like
-# total amount, tip amount, PULocation
+# total amount, tip amount
     
-corr = df[["payment_type", "total_amount", "tip_amount", "PULocationID"]].corr()
+corr = df[["payment_type", "total_amount", "tip_amount"]].corr()
 
 sns.heatmap(
     corr,
@@ -320,3 +321,40 @@ else:
         "figures/heatmap_to_check_paymenttype.png"
     )
 
+
+
+# what the payment type of thoese who do not tip?
+
+conn = sql.connect('df.db')
+
+df.to_sql(
+    'df',
+    conn,
+    if_exists='replace',
+    index=False
+)
+
+q = """
+SELECT
+    "payment_type",
+    COUNT (*) AS COUNTER
+FROM df
+WHERE "tip_amount" == 0
+GROUP BY "payment_type" 
+"""
+
+result = pd.read_sql_query(q, conn)
+
+result.plot(
+    y='COUNTER',
+    kind='bar',
+    figsize=(12, 12)
+)
+plt.title("These who don't tip, how they pay?")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/paytypeandtip.png"
+    )
