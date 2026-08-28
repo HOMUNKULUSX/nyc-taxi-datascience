@@ -358,3 +358,16 @@ else:
     plt.savefig(
         "figures/paytypeandtip.png"
     )
+
+# How much each payment types earn?
+r = df.groupby("payment_type")["total_amount"].sum()
+r.plot(kind='bar', figsize=(12, 12))
+
+plt.title("total earn of each payment types")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/paymenttype_amount.png"
+    )
