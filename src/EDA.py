@@ -163,6 +163,20 @@ else:
         "figures/hour_distribution.png"
     )
 
+# How much money made it in each day?
+dayo = df.groupby("pickup_day")["total_amount"].sum()
+dayo.plot(kind='line', figsize=(12, 12))
+
+plt.plot("HOW MUCH MONEY MADE IT IN EACH DAY")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/hour_distribution.png"
+    )
+
+
 # check, the relation between distance and amount
 sns.scatterplot(
     x='trip_distance',
