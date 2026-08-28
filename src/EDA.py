@@ -14,19 +14,20 @@ pd.set_option(
     None
 )
 
-show = True
+show = False
 
 # What the range of the most trips?
 # Is certain a mount repeated too much?
 df["trip_distance"].plot(kind='hist', bins=10, figsize=(12, 12))
-plt.title("TRIP DISTRIBUTION")
+plt.title("DISTANCE DISTRIBUTION")
 
 if show:
     plt.show()
 else:
     plt.savefig(
-        "figures/trip_distribution.png"
+        "figures/trip_distance_distribution.png"
     )
+    plt.close()
 
 
 # How long do the trips usually take?
@@ -35,7 +36,7 @@ df["duration_min"] = (
 )
 
 df["duration_min"].plot(kind='hist', bins=10, figsize=(12, 12))
-plt.title("TIME DISTRIBUTION")
+plt.title("TIME_DURATION DISTRIBUTION")
 
 if show:
     plt.show()
@@ -43,6 +44,7 @@ else:
     plt.savefig(
         "figures/time_distribution.png"
     )
+    plt.close()
 
 # What is the cost of the most trips?
 df["fare_amount"].plot(kind='hist', bins=10, figsize=(12, 12))
@@ -54,6 +56,7 @@ else:
     plt.savefig(
         "figures/fare_amount_distribution.png"
     )
+    plt.close()
 
 # Do people usually tip, and how much do they tip?
 df["tip_amount"].plot(kind='hist', bins=10, figsize=(12, 12))
@@ -65,6 +68,7 @@ else:
     plt.savefig(
         "figures/tip_distribution.png"
     )
+    plt.close()
 
 # Looking for any relation or better say correlation between tip, amount, duration, passenger count
 corr = df[["tip_amount", "fare_amount", "trip_duration", "passenger_count", "average_speed"]].corr()
@@ -78,14 +82,15 @@ sns.heatmap(
     fmt='0.2f'
 )
 
-plt.title("TIP AND AMOUNT")
+plt.title("RELATION OF MAIN FEATURES")
 
 if show:
     plt.show()
 else:
     plt.savefig(
-        "figures/heatmap_tipandamount.png"
+        "figures/heatmap_relation.png"
     )
+    plt.close()
 
 # checking this by scatter
 sns.scatterplot(
@@ -102,6 +107,7 @@ else:
     plt.savefig(
         "figures/scatter_tipandamount.png"
     )
+    plt.close()
 
 # to be more accurate let found out what percentage of total income comes from tips?
 df["tip_percentage"] = (
@@ -122,6 +128,7 @@ else:
     plt.savefig(
         "figures/scatter_tippercentage.png"
     )
+    plt.close()
 
 # What part of days most trips happen?
 # 24H
@@ -136,12 +143,13 @@ else:
     plt.savefig(
         "figures/hour_distribution.png"
     )
+    plt.close()
 
 # How much money we made for every hours?
 hor = df.groupby("pickup_hour")["total_amount"].sum()
 hor.plot(kind="line", figsize=(12, 12))
 
-plt.title("MONEY FOR EACH HOUR")
+plt.title("HOW MUCH MONEY MADE IN EACH HOUR")
 
 if show:
     plt.show()
@@ -149,6 +157,7 @@ else:
     plt.savefig(
         "figures/moneyforhour.png"
     )
+    plt.close()
 
 # Which day of a week most trips happen?
 df["pickup_day"] = df["tpep_pickup_datetime"].dt.dayofweek
@@ -162,6 +171,7 @@ else:
     plt.savefig(
         "figures/hour_distribution.png"
     )
+    plt.close()
 
 # How much money made it in each day?
 dayo = df.groupby("pickup_day")["total_amount"].sum()
@@ -173,8 +183,9 @@ if show:
     plt.show()
 else:
     plt.savefig(
-        "figures/hour_distribution.png"
+        "figures/moneymadeitindays.png"
     )
+    plt.close()
 
 
 # check, the relation between distance and amount
@@ -192,6 +203,7 @@ else:
     plt.savefig(
         "figures/amount_and_distance.png"
     )
+    plt.close()
 
 # Is there any relation between cost of trip and count of passengers?
 sns.scatterplot(
@@ -208,6 +220,7 @@ else:
     plt.savefig(
         "figures/amount_and_passengers.png"
     )
+    plt.close()
 
 
 
@@ -243,6 +256,7 @@ else:
     plt.savefig(
         "figures/some_of_totalamount.png"
     )
+    plt.close()
 
 
 TopDOL = df.groupby("Zone_y")["total_amount"].sum()
@@ -257,6 +271,7 @@ else:
     plt.savefig(
         "figures/some_of_totalamount2.png"
     )
+    plt.close()
 
 
 # Now to compare the cost of zones and number of zones:
@@ -289,6 +304,7 @@ else:
     plt.savefig(
         "figures/compare_sizeandtotalamount_for_PUL.png"
     )
+    plt.close()
 
 
 # same thing on DOLucation:
@@ -300,15 +316,15 @@ data = df[df["Zone_y"].isin(top_zones_y)].groupby("Zone_y").agg(
     trip_count=("Zone_y", "size")
 ).loc[top_zones_y]
 
-fig, ax1 = plt.subplots()
+fig, ax3 = plt.subplots()
 
-ax1.plot(data.index, data["total_amount"], color="blue", marker="o", label="Total amount")
+ax3.plot(data.index, data["total_amount"], color="blue", marker="o", label="Total amount")
 
-ax2 = ax1.twinx()
-ax2.plot(data.index, data["trip_count"], color="red", marker="o", label="Counter")
+ax4 = ax3.twinx()
+ax4.plot(data.index, data["trip_count"], color="red", marker="o", label="Counter")
 
-ax1.legend(loc="upper left")
-ax2.legend(loc="upper right")
+ax3.legend(loc="upper left")
+ax4.legend(loc="upper right")
 
 plt.title("compare the size and cost of PULocation")
 
@@ -321,6 +337,7 @@ else:
     plt.savefig(
         "figures/compare_sizeandtotalamount_for_DOL.png"
     )
+    plt.close()
 
 
 # Checking the payment_type:
@@ -347,6 +364,7 @@ else:
     plt.savefig(
         "figures/heatmap_to_check_paymenttype.png"
     )
+    plt.close()
 
 
 
@@ -385,6 +403,7 @@ else:
     plt.savefig(
         "figures/paytypeandtip.png"
     )
+    plt.close()
 
 # How much each payment types earn?
 r = df.groupby("payment_type")["total_amount"].sum()
@@ -398,3 +417,4 @@ else:
     plt.savefig(
         "figures/paymenttype_amount.png"
     )
+    plt.close()
