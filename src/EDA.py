@@ -137,6 +137,19 @@ else:
         "figures/hour_distribution.png"
     )
 
+# How much money we made for every hours?
+hor = df.groupby("pickup_hour")["total_amount"].sum()
+hor.plot(kind="line", figsize=(12, 12))
+
+plt.title("MONEY FOR EACH HOUR")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/moneyforhour.png"
+    )
+
 # Which day of a week most trips happen?
 df["pickup_day"] = df["tpep_pickup_datetime"].dt.dayofweek
 
@@ -264,7 +277,7 @@ else:
     )
 
 
-# same thing on DOLucatio n:
+# same thing on DOLucation:
 
 top_zones_y = df["Zone_y"].value_counts().head(10).index
 
