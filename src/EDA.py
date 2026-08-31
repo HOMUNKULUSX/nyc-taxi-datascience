@@ -254,7 +254,7 @@ if show:
     plt.show()
 else:
     plt.savefig(
-        "figures/some_of_totalamount.png"
+        "figures/sum_of_totalamount.png"
     )
     plt.close()
 
@@ -269,7 +269,7 @@ if show:
     plt.show()
 else:
     plt.savefig(
-        "figures/some_of_totalamount2.png"
+        "figures/sum_of_totalamount2.png"
     )
     plt.close()
 
@@ -289,6 +289,8 @@ ax1.plot(data.index, data["total_amount"], color="blue", marker="o", label="Tota
 
 ax2 = ax1.twinx()
 ax2.plot(data.index, data["trip_count"], color="red", marker="o", label="Counter")
+
+plt.xticks(rotation=90)
 
 ax1.legend(loc="upper left")
 ax2.legend(loc="upper right")
@@ -323,6 +325,8 @@ ax3.plot(data.index, data["total_amount"], color="blue", marker="o", label="Tota
 ax4 = ax3.twinx()
 ax4.plot(data.index, data["trip_count"], color="red", marker="o", label="Counter")
 
+plt.xticks(rotation=45)
+
 ax3.legend(loc="upper left")
 ax4.legend(loc="upper right")
 
@@ -339,32 +343,6 @@ else:
     )
     plt.close()
 
-
-# Checking the payment_type:
-# In our dataset we only have 1 and 2 in this column
-# 1 = Credit Card
-# 2 = Cash
-# Visulazing the relation between this feature and other features like
-# total amount, tip amount
-    
-corr = df[["payment_type", "total_amount", "tip_amount"]].corr()
-
-sns.heatmap(
-    corr,
-    annot=True,
-    cmap="coolwarm",
-    fmt="0.2f"
-)
-
-plt.title("RELATION BETWEEN PAYMENT TYPE AND OTHER FEATURES")
-
-if show:
-    plt.show()
-else:
-    plt.savefig(
-        "figures/heatmap_to_check_paymenttype.png"
-    )
-    plt.close()
 
 
 
@@ -418,3 +396,31 @@ else:
         "figures/paymenttype_amount.png"
     )
     plt.close()
+
+
+respo = df.groupby("pickup_hour").agg(
+    total_amount=("total_amount", "sum"),
+    count=("total_amount", "size")
+
+)
+
+fig, ax5 = plt.subplots()
+
+ax5.plot(respo.index, respo['total_amount'], color='blue', marker='o', label='total amount')
+ax6 = ax5.twinx()
+
+ax6.plot(respo.index, respo['count'], color='red', marker='o', label='counter')
+
+ax5.legend(loc="upper right")
+ax6.legend(loc="upper left")
+
+plt.title("Compare the size and the cost of each hour")
+
+if show:
+    plt.show()
+else:
+    plt.savefig(
+        "figures/comparization.png"
+    )
+    plt.close()
+
