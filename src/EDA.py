@@ -14,7 +14,7 @@ pd.set_option(
     None
 )
 
-show = False
+show = True
 
 # What the range of the most trips?
 # Is certain a mount repeated too much?
